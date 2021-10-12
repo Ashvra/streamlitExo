@@ -45,37 +45,38 @@ choix_slidebar = st.sidebar.radio("Menu", ("Présentation de l'exercice",
 ################################################################################################
 
 if choix_slidebar == "Présentation de l'exercice":
-    st.title('Corrélation et de Distribution du Data Set Cars')
+    st.markdown('<H1 style="color:#25f305;">Corrélation et Distribution du Data Set Cars</h1>', unsafe_allow_html=True)
     
     img = Image.open("pdv1.jpg")  
     st.image(img, width=620)
-    st.subheader("Sujet:") 
+    st.markdown('<H3 style="color:#25f305;">Sujet:</h3>', unsafe_allow_html=True) 
 
     st.markdown("""Dans cet **exercice** nous verrons différentes applications de **Streamlit** et comment ajouter:
 * des titres
-* des Photos
+* des photos
 * du texte
 * des boutons interactifs
-* des listes de sélections
-* et enfins des graphiques""")
+* des listes de sélection
+* personnalisation des couleurs
+* et enfin des graphiques""")
 
 ################################################################################################
 ### Page 2 ### Analyse de la distribution du Data Set
 ################################################################################################
 
 if choix_slidebar == "Analyse de la distribution du Data Set":
-    st.header("Distribution de 'cars'")
+    st.markdown('<H2 style="color:#25f305;">Distribution de "cars"</h2>', unsafe_allow_html=True) 
     col1, col2 = st.columns([1, 5]) 
     ########################################################
     ### GRAPH 1 ### histogramme répartition de "country" ###
     ########################################################
     with col1:
         st.markdown("""<br/><br/><br/><br/><br/>
-        Ici nous pouvons observer le nombre total de **voitures** par **région** :red_car: """, unsafe_allow_html=True)
+        Dans ce premier graphique nous pouvons observer le nombre total de **voitures** par **région** :red_car: """, unsafe_allow_html=True)
 
     with col2:    
         fig= px.histogram(df_cars, x='continent',
-                        title="Répartition des voitures par Régions")
+                        title="Répartition des voitures par région")
         fig.update_xaxes(title= 'Régions')
         fig.update_yaxes(title= 'Nombre de Voitures')
         st.plotly_chart(fig)
@@ -86,12 +87,12 @@ if choix_slidebar == "Analyse de la distribution du Data Set":
     ##########################################################
     with col1:
         st.markdown("""<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        Là le nombre de **voiture** en fonction du nombre de **cylindres**:blue_car:""", unsafe_allow_html=True)
+        Ici le nombre de **voiture** en fonction du nombre de **cylindres**:blue_car:""", unsafe_allow_html=True)
 
     with col2:
         fig1= px.histogram(df_cars, x='cylinders',
-                        title="Répartition des voitures par cylindres")
-        fig1.update_xaxes(title= 'Nombre de cylindres"')
+                        title="Répartition des voitures par cylindre")
+        fig1.update_xaxes(title= 'Nombre de cylindres')
         fig1.update_yaxes(title= 'Nombre de Voitures')
         st.plotly_chart(fig1)
 
@@ -104,7 +105,7 @@ if choix_slidebar == "Analyse de la distribution du Data Set":
     with col2:
         fig2= px.histogram(df_cars, x='time-to-60',
                         title="Répartition des voitures par Accélération")
-        fig2.update_xaxes(title= 'Temps pour atteindre 60 milles/h', autorange="reversed")
+        fig2.update_xaxes(title= 'Temps pour atteindre 60 miles/h', autorange="reversed")
         fig2.update_yaxes(title= 'Nombre de Voitures')
         st.plotly_chart(fig2)
 
@@ -152,7 +153,7 @@ if choix_slidebar == "Analyse de la distribution du Data Set":
 ################################################################################################
 
 if choix_slidebar == "Analyse de la corrélation du Data Set":
-    st.header("Corrélations dans 'cars'")
+    st.markdown('<H2 style="color:#25f305;">Corrélations dans "cars"</h2>', unsafe_allow_html=True)
     ###########################
     ### GRAPH 5 ### heatmap ###
     ###########################
@@ -169,7 +170,7 @@ if choix_slidebar == "Analyse de la corrélation du Data Set":
     st.markdown("""<br/>""", unsafe_allow_html=True)
     st.markdown("""---""", unsafe_allow_html=True)
     st.markdown("""<br/>
-        Les deux graphiques ci-dessous mettent en avant des corrélations via un nuage de point coloré par 'cm3' """, unsafe_allow_html=True)
+        Les deux graphiques ci-dessous mettent en avant des corrélations via un nuage de points coloré par 'cm3' """, unsafe_allow_html=True)
     col1, col2 = st.columns([1, 5]) 
     with col1:
         st.markdown("""<br/><br/><br/><br/><br/><br/>
@@ -180,7 +181,8 @@ if choix_slidebar == "Analyse de la corrélation du Data Set":
                         x= 'weightlbs',
                         y= 'mpg',
                         color= 'cubicinches',
-                        title= 'Corrélation consomation/poids/cm3',
+                        color_continuous_scale='YlOrRd',
+                        title= 'Corrélation consommation/poids/cm3',
                         trendline= 'ols',
                         labels={
                             "weightlbs": "Poids en Livre",
@@ -197,13 +199,14 @@ if choix_slidebar == "Analyse de la corrélation du Data Set":
     with col1:
         st.markdown("""<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         Une nouvelle fois, nous observons une corrélation négative,
-         plus la voiture possèdes de chevaux et moins il faut de secondes pour atteindre 60 miles par heure""", unsafe_allow_html=True)
+         plus la voiture possède de chevaux et moins il faut de secondes pour atteindre 60 miles par heure""", unsafe_allow_html=True)
 
     with col2:
         fig6= px.scatter(df_cars,
                         x= 'hp',
                         y= 'time-to-60',
                         color= 'cubicinches',
+                        color_continuous_scale='YlOrRd',
                         title= 'Corrélation Chevaux/temps pour atteindre 60mPerH/cm3',
                         trendline= 'ols',
                         labels={
